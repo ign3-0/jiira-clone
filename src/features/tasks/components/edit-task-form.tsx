@@ -48,27 +48,27 @@ export const EditTaskForm = ({
 }: EditTaskFormProps) => {
   const { mutate, isPending } = useUpdateTask();
 
-  // const form = useForm<z.infer<typeof createTaskSchema>>({
-  //   resolver: zodResolver(
-  //     createTaskSchema.omit({ workspaceId: true, description: true })
-  //   ),
-  //     defaultValues: {
-  //       ...initialValues,
-  //       dueDate: initialValues.dueDate
-  //         ? new Date(initialValues.dueDate)
-  //         : undefined,
-  //     },
-  // });
-
   const form = useForm<z.infer<typeof createTaskSchema>>({
-    resolver: zodResolver(createTaskSchema),
-    defaultValues: {
-      ...initialValues,
-      dueDate: initialValues.dueDate
-        ? new Date(initialValues.dueDate)
-        : undefined,
-    },
+    resolver: zodResolver(
+      createTaskSchema.omit({ workspaceId: true, description: true })
+    ),
+      defaultValues: {
+        ...initialValues,
+        dueDate: initialValues.dueDate
+          ? new Date(initialValues.dueDate)
+          : undefined,
+      },
   });
+
+  // const form = useForm<z.infer<typeof createTaskSchema>>({
+  //   resolver: zodResolver(createTaskSchema),
+  //   defaultValues: {
+  //     ...initialValues,
+  //     dueDate: initialValues.dueDate
+  //       ? new Date(initialValues.dueDate)
+  //       : undefined,
+  //   },
+  // });
 
   const onSubmit = (values: z.infer<typeof createTaskSchema>) => {
     mutate(
