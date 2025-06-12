@@ -1,0 +1,1 @@
+export const AUTH_COOKIE = "cwn-jira-clone-session"
